@@ -71,7 +71,7 @@ void gemm_blis( char transa, char transb, int m, int n, int k,
           for ( ir=1; ir<=mc; ir+=MR ) {
             mr = min(mc-ir+1, MR);
 	    //if( (mr == MR) && (nr == NR))
-	    gemm_microkernel_neon_4x4(mr, nr, kc, alpha, &Ac[(ir-1)*kc], &Bc[(jr-1)*kc], betaI, &Cref((ic-1)+ir,(jc-1)+jr), Clda);
+	    gemm_microkernel_neon_4x8( mr, nr, kc, alpha, &Ac[(ir-1)*kc], &Bc[(jr-1)*kc], betaI, &Cref((ic-1)+ir,(jc-1)+jr), Clda);
 	    //else
 	    //gemm_base( mr, nr, kc, alpha, &Ac[(ir-1)*kc], MR, &Bc[(jr-1)*kc], NR, betaI, &Cref((ic-1)+ir,(jc-1)+jr), Clda );
 
@@ -157,8 +157,6 @@ void gemm_base( int m, int n, int k, float alpha,
 /*
   Baseline micro-kernel, for cases where the dimension does not match MR x NR
 */
-
-  //printf("BASE KERNEL ... \n");	
   int    i, j, p;
   float  zero = 0.0, one = 1.0, tmp;
 

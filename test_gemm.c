@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
          m, n, k, mc, nc, kc, visual, Alda, Blda, Clda;
 
   printf("# =======================================================================================\n");
-  printf("# Driver for the evaluation of GEMM\n");
+  printf("# Driver for the evaluation of GEMM : NC:%d x MC :%d \n",MR, NR);
   printf("# =======================================================================================\n");
   printf("# Program starts...\n");
   printf("#        transa transb     m     n     k     mc     nc     kc     Time   GFLOPS     ERROR\n");
